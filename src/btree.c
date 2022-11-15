@@ -71,7 +71,7 @@ struct tree_node *Remove(int x, struct tree_node *t) {
       while (temp->left != NULL) { temp = temp->left; }            // Finds value of node that will be larger than all values to the left of the node that will be removed, but smaller than all values to the right of the node that will be remmoved.
       t->item = temp->item;                                        // Readjusts values to uphold logic.
 
-      free(temp);
+      Remove(x,temp);
       return t;
     }
   }
