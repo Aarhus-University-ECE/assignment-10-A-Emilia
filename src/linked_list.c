@@ -38,6 +38,7 @@ void print_list(node *p) {
 int sum_squares(node *p) {
   // Add your code for excercise 2
   // You can find the tests in tests.cpp
+  assert(p != NULL);
   int sum = 0;
 
   if (p->next != NULL) {
@@ -53,6 +54,8 @@ typedef int (*fn_int_to_int)(int);
 
 node *map(node *p, fn_int_to_int f) {
   // Recursive map function
+  assert(p != NULL);
+
   node *temp = malloc(sizeof(node));
 
   if (p->next != NULL) { 
