@@ -1,6 +1,7 @@
 #include <assert.h> /* assert */
 #include <stdio.h>  /* printf */
 #include <stdlib.h> /* malloc, free */
+#include <math.h>
 
 #include "linked_list.h"
 
@@ -26,20 +27,42 @@ void free_list(node *p) {
 void print_list(node *p) {
   // Add your code for exercise 1
   // There is NO testcode for this
+  if (p->next != NULL) {
+    printf("%d\t", p->value);             // Prints the current value.
+    print_list(p->next);                  // Recursion.
+  } else {                                // End of the linked list.
+    printf("%d", p->value);
+  }
 }
 
 int sum_squares(node *p) {
   // Add your code for excercise 2
   // You can find the tests in tests.cpp
-  return -1;
+  int sum = 0;
+
+  if (p->next != NULL) {
+    sum += pow(p->value, 2);              // Adds the power of the current value to the sum.
+    sum += sum_squares(p->next);          // Recursion. 
+  } else {                                // End of the linked list.
+    sum += pow(p->value, 2);
+  }
+  return sum;
 }
 
 typedef int (*fn_int_to_int)(int);
 
-node *map(node *p, fn_int_to_int f) { 
-  // Add your code for excercise 3
-  
-  return NULL; 
+node *map(node *p, fn_int_to_int f) {
+  // Recursive map function
+  node *temp = malloc(sizeof(node));
+
+  if (p->next != NULL) { 
+    temp->value = f(p->value);            // Applies f to element.
+    temp->next = map(p->next, f);         // Recursion.
+  } else {                                // End of the linked list.
+    temp->value = f(p->value);            // Applies f to element.
+    temp->next = NULL;
+    return temp;
+  }
 }
 
 int square(int x) { return x * x; }
